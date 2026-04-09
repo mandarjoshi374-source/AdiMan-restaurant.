@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Premium Food Order</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+}
+
+/* NAVBAR */
+nav{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+nav ul{
+    display:flex;
+    gap:20px;
+    list-style:none;
+}
+
+/* MAIN CONTAINER */
+.container{
+    width:85%;
+    margin:30px auto;
+    padding:30px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+}
+
+/* SEARCH */
+#searchBar{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+/* FOOD ITEM */
+.food-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.15);
+    margin:10px 0;
+    padding:15px;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.food-item:hover{
+    transform:scale(1.03);
+}
+
+/* BUTTONS */
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:30px;
+    background:#00c6ff;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#0099cc;
+}
+
+/* CART */
+.cart{
+    margin-top:30px;
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:15px;
+}
+
+.cart li{
+    margin:10px 0;
+}
+
+.remove-btn{
+    background:red;
+    padding:5px 10px;
+    margin-left:10px;
+}
+
+/* PLACE ORDER */
+#customerName{
+    padding:12px;
+    width:250px;
+    border:none;
+    border-radius:10px;
+}
+
+#placeBtn{
+    background:green;
+    padding:12px 25px;
+}
+
+#placeBtn:hover{
+    background:darkgreen;
+}
+
+/* SUCCESS MESSAGE */
+#successMsg{
+    color:lime;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:20px;
+    text-align:center;
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+<h2>🍴 Healthy Bites</h2>
+
+<ul>
+<li>Home</li>
+<li>Menu</li>
+<li>Diet</li>
+<li>Order</li>
+<li>Contact</li>
+</ul>
+</nav>
+
+<div class="container">
+
+<h1>Order Your Food</h1>
+
+<input type="text" id="searchBar" placeholder="Search Food..." onkeyup="searchFood()">
+
+<div id="foodList">
+
+<div class="food-item">
+<span>🥗 Quinoa Salad - ₹299</span>
+<button onclick="addToCart('Quinoa Salad',299)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🥑 Avocado Toast - ₹199</span>
+<button onclick="addToCart('Avocado Toast',199)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🥤 Mango Smoothie - ₹149</span>
+<button onclick="addToCart('Mango Smoothie',149)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🍕 Healthy Pizza - ₹499</span>
+<button onclick="addToCart('Healthy Pizza',499)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🍔 Veg Burger - ₹189</span>
+<button onclick="addToCart('Veg Burger',189)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🌯 Paneer Wrap - ₹259</span>
+<button onclick="addToCart('Paneer Wrap',259)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🍗 Grilled Chicken - ₹399</span>
+<button onclick="addToCart('Grilled Chicken',399)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🥞 Protein Pancakes - ₹279</span>
+<button onclick="addToCart('Protein Pancakes',279)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🥬 Fresh Green Salad - ₹249</span>
+<button onclick="addToCart('Fresh Green Salad',249)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🍓 Healthy Fruit Bowl - ₹199</span>
+<button onclick="addToCart('Healthy Fruit Bowl',199)">Add</button>
+</div>
+
+<div class="food-item">
+<span>🍱 Protein Meal Plate - ₹349</span>
+<button onclick="addToCart('Protein Meal Plate',349)">Add</button>
+</div>
+</div>
+
+<div class="cart">
+<h2>Your Cart</h2>
+
+<ul id="cartList"></ul>
+
+<h3>Total: ₹<span id="total">0</span></h3>
+
+<br>
+
+<input type="text" id="customerName" placeholder="Enter Your Name">
+
+<br><br>
+
+<button onclick="placeOrder()" id="placeBtn">Place Order</button>
+
+<p id="successMsg"></p>
+
+</div>
+
+</div>
+
+<script>
+let total=0;
+
+function addToCart(item,price){
+
+let li=document.createElement("li");
+
+li.innerHTML=
+`${item} - ₹${price}
+<button class="remove-btn" onclick="removeItem(this,${price})">Remove</button>`;
+
+document.getElementById("cartList").appendChild(li);
+
+total+=price;
+
+document.getElementById("total").innerText=total;
+}
+
+function removeItem(button,price){
+
+button.parentElement.remove();
+
+total-=price;
+
+document.getElementById("total").innerText=total;
+}
+
+function searchFood(){
+
+let input=document.getElementById("searchBar").value.toLowerCase();
+
+let items=document.querySelectorAll(".food-item");
+
+items.forEach(item=>{
+
+if(item.innerText.toLowerCase().includes(input)){
+item.style.display="flex";
+}else{
+item.style.display="none";
+}
+
+});
+}
+
+/* PLACE ORDER FUNCTION */
+function placeOrder(){
+
+let name=document.getElementById("customerName").value;
+
+if(name==""){
+document.getElementById("successMsg").innerHTML="⚠ Please Enter Your Name!";
+return;
+}
+
+if(total==0){
+document.getElementById("successMsg").innerHTML="⚠ Please Add Items To Cart!";
+return;
+}
+
+document.getElementById("successMsg").innerHTML=
+"🎉 Thank You " + name + "! Your Order Is Placed Successfully!";
+
+document.getElementById("cartList").innerHTML="";
+document.getElementById("total").innerText="0";
+
+document.getElementById("customerName").value="";
+
+total=0;
+}
+</script>
+
+</body>
+</html>

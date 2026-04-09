@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Bites - Diet Plans</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+nav {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+nav h2 { color: white; }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+}
+
+.page-title {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+}
+
+.diet-card {
+    display: flex;
+    background: rgba(255,255,255,0.9);
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.diet-image img {
+    width: 350px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.diet-content {
+    padding: 30px;
+    flex: 1;
+}
+
+.diet-content h3 {
+    font-size: 2rem;
+}
+
+.plan-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.weight-btn {
+    background: #007BFF;
+}
+
+.muscle-btn {
+    background: #23a6d5;
+}
+
+.timetable-card {
+    display: none;
+    margin-top: 25px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timetable-card h2 {
+    margin-top: 0;
+}
+
+.timetable-card ul {
+    padding-left: 20px;
+}
+
+@media(max-width: 800px) {
+    .diet-card {
+        flex-direction: column;
+    }
+
+    .diet-image img {
+        width: 100%;
+        height: 250px;
+    }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <h2>Healthy Bites</h2>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Diet</a></li>
+        <li><a href="#">Order</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1 class="page-title">Diet Plans</h1>
+
+    <div class="diet-card">
+        <div class="diet-image">
+            <img src="https://plus.unsplash.com/premium_photo-1723802481217-858a3492b845?w=600" alt="Weight Loss">
+        </div>
+        <div class="diet-content">
+            <h3>🔥 Weight Loss Journey</h3>
+            <p>Shed extra pounds with smart dieting and exercise planning.</p>
+            <input type="number" id="weightInputLoss" placeholder="Enter Your Weight (kg)" style="padding:12px;width:80%;border-radius:10px;border:1px solid #ccc;">
+            <br>
+            <button class="plan-btn weight-btn" onclick="toggleWeightPlan()">Start Weight Loss</button>
+
+            <div id="weightPlanCard" class="timetable-card">
+                <h2>🔥 Weight Loss Timetable</h2>
+                <ul id="weightPlanList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="diet-card">
+        <div class="diet-image">
+            <img src="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?auto=format&fit=crop&w=600" alt="Muscle Gain">
+        </div>
+        <div class="diet-content">
+            <h3>💪 Muscle Gain Elite</h3>
+            <p>Build lean muscle with protein-rich diet and workout.</p>
+            <input type="number" id="weightInputMuscle" placeholder="Enter Your Weight (kg)" style="padding:12px;width:80%;border-radius:10px;border:1px solid #ccc;">
+            <br>
+            <button class="plan-btn muscle-btn" onclick="toggleMusclePlan()">Start Muscle Gain</button>
+
+            <div id="musclePlanCard" class="timetable-card">
+                <h2>💪 Muscle Gain Timetable</h2>
+                <ul id="musclePlanList"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleWeightPlan() {
+    let weight = parseInt(document.getElementById('weightInputLoss').value);
+    let card = document.getElementById('weightPlanCard');
+    let list = document.getElementById('weightPlanList');
+
+    let plan = '';
+
+    if(weight < 60){
+        plan = '<li>7AM - Detox Water</li><li>8AM - Oats + Fruits</li><li>1PM - Salad + Soup</li><li>6PM - Cardio 45min</li><li>8PM - Light Dinner</li>';
+    }else if(weight < 80){
+        plan = '<li>7AM - Lemon Water</li><li>8AM - Protein Breakfast</li><li>1PM - Brown Rice + Veggies</li><li>6PM - Running 30min</li><li>8PM - Soup + Salad</li>';
+    }else{
+        plan = '<li>6AM - Warm Water</li><li>8AM - Low Carb Meal</li><li>12PM - Heavy Protein Lunch</li><li>5PM - HIIT Workout</li><li>8PM - Very Light Dinner</li>';
+    }
+
+    list.innerHTML = plan;
+    card.style.display = 'block';
+    card.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function toggleMusclePlan() {
+    let weight = parseInt(document.getElementById('weightInputMuscle').value);
+    let card = document.getElementById('musclePlanCard');
+    let list = document.getElementById('musclePlanList');
+
+    let plan = '';
+
+    if(weight < 60){
+        plan = '<li>7AM - Banana Shake</li><li>8AM - Eggs + Milk</li><li>1PM - Rice + Paneer</li><li>5PM - Protein Shake</li><li>8PM - Heavy Dinner</li>';
+    }else if(weight < 80){
+        plan = '<li>7AM - Peanut Butter Toast</li><li>9AM - Oats + Eggs</li><li>1PM - Chicken + Rice</li><li>6PM - Gym Workout</li><li>9PM - Protein Meal</li>';
+    }else{
+        plan = '<li>6AM - Mass Gainer Shake</li><li>8AM - Heavy Breakfast</li><li>1PM - Double Protein Lunch</li><li>5PM - Strength Training</li><li>9PM - Muscle Recovery Meal</li>';
+    }
+
+    list.innerHTML = plan;
+    card.style.display = 'block';
+    card.scrollIntoView({behavior:'smooth', block:'center'});
+}
+</script>
+
+</body>
+</html>

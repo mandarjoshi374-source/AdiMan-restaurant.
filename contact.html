@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Bites Contact</title>
+
+<style>
+
+/* BODY WITH BACKGROUND IMAGE */
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+
+background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+
+}
+
+/* DARK OVERLAY */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+z-index:-1;
+}
+
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+nav h2{
+color:white;
+font-size:28px;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+transition:.3s;
+}
+
+nav ul li a:hover{
+color:yellow;
+}
+
+/* MAIN CONTAINER */
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px;
+}
+
+/* TITLE */
+h1{
+text-align:center;
+font-size:45px;
+color:white;
+margin-bottom:30px;
+animation:fadeDown 1s ease;
+}
+
+@keyframes fadeDown{
+from{
+opacity:0;
+transform:translateY(-50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* CONTACT WRAPPER */
+.contact-wrapper{
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+/* IMAGE */
+.contact-image{
+flex:1;
+min-width:300px;
+}
+
+.contact-image img{
+width:100%;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+transition:.5s;
+animation:float 3s ease-in-out infinite;
+}
+
+.contact-image img:hover{
+transform:scale(1.05);
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+}
+
+/* FORM */
+.contact-form{
+flex:1;
+min-width:320px;
+background:rgba(255,255,255,0.15);
+padding:30px;
+border-radius:25px;
+backdrop-filter:blur(15px);
+box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+border-radius:15px;
+font-size:16px;
+outline:none;
+}
+
+.contact-form textarea{
+height:150px;
+resize:none;
+}
+
+.contact-form button{
+width:100%;
+padding:15px;
+background:#27ae60;
+border:none;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.contact-form button:hover{
+background:#219150;
+transform:scale(1.05);
+}
+
+/* INFO BOXES */
+.info-section{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:50px;
+}
+
+.info-box{
+background:rgba(255,255,255,0.20);
+padding:25px;
+border-radius:20px;
+text-align:center;
+backdrop-filter:blur(10px);
+color:white;
+transition:.4s;
+}
+
+.info-box:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,0.30);
+}
+
+.info-box h3{
+margin-bottom:10px;
+font-size:24px;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<h2>Healthy Bites</h2>
+
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="diet.html">Diet</a></li>
+<li><a href="order.html">Order</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<div class="container">
+
+<h1>📞 Contact Us</h1>
+
+<div class="contact-wrapper">
+
+<div class="contact-image">
+<img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=800">
+</div>
+
+<div class="contact-form">
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<input type="text" placeholder="Phone Number">
+<textarea placeholder="Write Your Message"></textarea>
+
+<button onclick="submitForm()">Send Message 🚀</button>
+</div>
+
+</div>
+
+<div class="info-section">
+
+<div class="info-box">
+<h3>📍 Address</h3>
+<p>chh.sambhajinagar, Maharashtra, India</p>
+</div>
+
+<div class="info-box">
+<h3>📞 Phone</h3>
+<p>+91 98765 xxxxx</p>
+</div>
+
+<div class="info-box">
+<h3>📧 Email</h3>
+<p>healthybites@gmail.com</p>
+</div>
+
+<div class="info-box">
+<h3>⏰ Timing</h3>
+<p>9 AM - 11 PM Daily</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function submitForm(){
+alert("✅ Thank You For Contacting Healthy Bites!\nWe Will Reply Soon ❤️");
+}
+</script>
+
+</body>
+</html>
